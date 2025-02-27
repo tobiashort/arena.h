@@ -27,7 +27,7 @@ Arena arena_new(size_t cap) {
 
 void *arena_alloc(Arena *arena, size_t size) {
   if ((arena->pos + size) > arena->cap) {
-    printf("out of memory\n");
+    printf("fatal: not enough memory\n");
     abort();
   }
   void *ret = arena->beg + arena->pos;
