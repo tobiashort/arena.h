@@ -27,8 +27,8 @@ Arena arena_new(size_t cap) {
 
 void *arena_alloc(Arena *arena, size_t size) {
   if ((arena->pos + size) > arena->cap) {
-    printf("fatal: not enough memory\n");
-    abort();
+    arena->cap = arena->cap * 2;
+    arena->beg = realloc(arena->beg, arena->cap);
   }
   void *ret = arena->beg + arena->pos;
   arena->pos += size;
@@ -45,7 +45,6 @@ void arena_debug(Arena *a) {
   printf("cap: %ld\n", a->cap);
   printf("beg: %p\n",  a->beg);
   printf("pos: %p\n",  a->beg+a->pos);
-  printf("\n");
   printf("[");
   for (int i = 0; i < a->pos; i++) {
     printf("#");

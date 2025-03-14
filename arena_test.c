@@ -18,5 +18,6 @@ int main() {
 
   Arena a3 = arena_new(sizeof(char)*16);
   arena_alloc(&a3, sizeof(char)*16+1);
-  // panic
+  arena_debug(&a3);
+  arena_free(&a3);
 }
